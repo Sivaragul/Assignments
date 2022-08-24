@@ -1,0 +1,108 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _23._08._2022_Problem3
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Employee s1 = new Employee();
+            Console.WriteLine("Enter the Empno");
+            s1.Empno = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter the Ename");
+            s1.Ename = Console.ReadLine();
+            Console.WriteLine("Enter the sal");
+            s1.Sal = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter the Deptno");
+            s1.Deptno = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("After Printing------");
+
+            Console.WriteLine(s1.Empno);
+            Console.WriteLine(s1.Ename);
+            Console.WriteLine(s1.Sal);
+            Console.WriteLine(s1.Deptno);
+
+            Console.ReadKey();
+        }
+    }
+}
+
+
+
+==========================================================================================================================================================
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _23._08._2022_Problem3
+{
+    internal class Class1
+    {
+
+    }
+    struct Employee
+    {
+        public int Empno;
+        public string Ename;
+        public int Sal;
+        public int Deptno;
+
+        public int empno
+        {
+            get
+            {
+                return Empno;
+
+            }
+            set
+            {
+                Empno = value;
+            }
+        }
+        public string ename
+        {
+            get
+            {
+                return Ename;
+            }
+            set
+            {
+                Ename = value;
+            }
+        }
+        public int sal
+        {
+            get
+            {
+                return Sal;
+
+            }
+            set
+            {
+                Sal = value;
+            }
+        }
+        public int deptno
+        {
+            get
+            {
+                return Deptno;
+            }
+            set
+            {
+                Deptno = value;
+            }
+
+        }
+    }
+}
+
