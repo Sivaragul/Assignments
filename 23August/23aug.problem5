@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _23._08._2022Problem_5
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Employee[] emp = new Employee[4];
+            for (int i = 0; i < 2; i++)
+            { 
+
+                Console.WriteLine("Enter a Empno:");
+                int Empno = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter a Ename:");
+                string Ename = Console.ReadLine();
+                Console.WriteLine("Enter a Sal:");
+                int Sal= Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter a Deptno:");
+                int Deptno = Convert.ToInt32(Console.ReadLine());
+
+                emp[i].AcceptEmployee(Empno, Ename, Sal, Deptno);
+
+            }
+            Console.WriteLine("=============================");
+            Console.WriteLine("Printing the data");
+
+            for(int i=0;i<2;i++)
+            {
+                emp[i].DisplayInfo();
+            }
+
+
+            Console.ReadLine();
+        }
+    }
+}
+
+=================================================================================================================================================================
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _23._08._2022Problem_5
+{
+    internal class Class1
+    {
+    }
+
+    struct Employee
+    {
+        public int Empno;
+        public string Ename;
+        public int Sal;
+        public int Deptno;
+
+        public void AcceptEmployee(int empno, string ename, int sal, int deptno)
+        {
+            Empno = empno;
+            Ename = ename;
+            Sal = sal;
+            Deptno = deptno;
+        }
+
+        public void DisplayInfo()
+        {
+            Console.WriteLine(Empno);
+            Console.WriteLine(Ename);
+            Console.WriteLine(Sal);
+            Console.WriteLine(Deptno);
+        }
+    }
+}
