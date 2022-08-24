@@ -1,0 +1,23 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ResuableCodeLibrary
+{
+    public class problem4
+    {
+        public static void split()
+        {
+            string s1 = "Welcome to the world of c# programmimg";
+            char[] sep = { '#' };
+            string[] result = s1.Split(sep);
+            foreach (var item in result)
+            {
+                Console.WriteLine(item);
+            }
+            
+        }
+}
+}
