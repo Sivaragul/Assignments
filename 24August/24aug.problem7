@@ -1,0 +1,25 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ResuableCodeLibrary
+{
+    public class problem7
+    {
+        public static void Day()
+        {
+            Console.WriteLine("Enter Date:");
+            DateTime dt = new DateTime();
+            dt = Convert.ToDateTime(Console.ReadLine());
+            Console.WriteLine("Year:" + dt.Year);
+            Console.WriteLine("Month:" + dt.Month);
+            Console.WriteLine("Day:" + dt.Day);
+            Console.WriteLine("Hour:" + dt.Hour);
+            Console.WriteLine("Minute:" + dt.Minute);
+            Console.WriteLine("Second:" + dt.Millisecond);
+            Console.WriteLine("Millisecond:" + dt.Millisecond);
+        }
+    }
+}
