@@ -1,0 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ResuableCodeLibrary
+{
+    public class problem5
+    {
+        public static void Uppercase()
+        {
+            Console.WriteLine("Enter a string:");
+            string str = Console.ReadLine();
+
+            Console.WriteLine("In uppercase:" + str.ToUpper());
+        }
+    }
+}
