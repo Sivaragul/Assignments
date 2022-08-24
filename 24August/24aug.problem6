@@ -1,0 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace ResuableCodeLibrary
+{
+    public class problem6
+    {
+        public static void filename()
+        {
+            string path = @"C:\Users\SIVARAGUL\source\repos\MyApp\firstFile.txt";
+            File.Create(path);
+            
+        }
+    }
+}
