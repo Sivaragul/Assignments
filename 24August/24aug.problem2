@@ -1,0 +1,20 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ResuableCodeLibrary
+{
+    public class problem2
+    {
+        public static void Copy()
+        {
+            Console.WriteLine("Enter string:");
+            string s1 = Console.ReadLine();
+
+            string s2 = string.Copy(s1);
+            Console.WriteLine("Copy of string:" + s2);
+        }
+    }
+}
