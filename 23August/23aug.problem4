@@ -1,0 +1,78 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+
+namespace _23._08._2022Problem_4
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Employee s = new Employee();
+
+            Console.WriteLine("Enter a Empno:");
+            int Empno = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter a Ename:");
+            string Ename = Console.ReadLine();
+            Console.WriteLine("Enter a Sal:");
+            int Sal = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter a Deptno:");
+            int Deptno = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("===========================");
+
+            s.AcceptEmployee( Empno,Ename,Sal,Deptno);    
+        
+            Console.WriteLine("Now Printing the data");
+            s.DisplayInfo();
+            Console.ReadLine();
+
+        }
+
+
+
+       
+        
+    }
+}
+
+=================================================================================================================================================================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _23._08._2022Problem4
+{
+    internal class Class1
+    {
+    }
+        struct Employee
+        {
+            public int Empno;
+            public string Ename;
+            public int Sal;
+            public int Deptno;
+
+            public void AcceptEmployee(int empno, string ename, int sal, int deptno)
+            {
+                Empno = empno;
+                Ename = ename;
+                Sal = sal;
+                Deptno = deptno;
+            }
+
+            public void DisplayInfo()
+            {
+                Console.WriteLine(Empno);
+                Console.WriteLine(Ename);
+                Console.WriteLine(Sal);
+                Console.WriteLine(Deptno);
+            }
+        }
+}
+
