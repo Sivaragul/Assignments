@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _23._08._2022_Problem6
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(deptnames.Purchase);
+            int deptno1 = (int)deptnames.Purchase;
+            Console.WriteLine(deptno1);
+
+            Console.WriteLine(deptnames.Sales);
+            int deptno2 = (int)deptnames.Sales;
+            Console.WriteLine(deptno2);
+
+            Console.WriteLine(deptnames.Training);
+            int deptno3 = (int)deptnames.Training;
+            Console.WriteLine(deptno3);
+
+            Console.WriteLine(deptnames.Accounts);
+            int deptno4 = (int)deptnames.Accounts;
+            Console.WriteLine(deptno4);
+
+            Console.ReadLine();
+        }
+    }
+}
+
+==================================================================================================================================================================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _23._08._2022_Problem6
+{
+    internal class Class1
+    {
+    }
+
+    enum deptnames
+    {
+        Purchase = 1,
+        Sales = 2,
+        Training = 3,
+        Accounts = 4
+    }
+
+}
