@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Filehandling1
+{
+    internal class problem3
+    {
+        static void Main(string[] args)
+        {
+            //string path = @"C:\Users\SIVARAGUL\source\repos\Result";
+            //Directory.CreateDirectory(path);
+            //Console.WriteLine("Directory created");
+
+            //string s1, s2, s3;
+            //s1 = @"C:\Users\SIVARAGUL\source\repos\Result\Results17-18";
+            //Directory.CreateDirectory(s1);
+            //s2 = @"c:\users\sivaragul\source\repos\result\Results18-19";
+            //Directory.CreateDirectory(s2);
+            //s3 = @"c:\users\sivaragul\source\repos\result\Results20-21";
+            //Directory.CreateDirectory(s3);
+            //Console.WriteLine("Subdirectory created");
+            //string p1 = @"C:\Users\SIVARAGUL\source\repos\Result\Results17-18\F1.txt";
+            //File.Create(p1);
+            //string p2 = @"C:\Users\SIVARAGUL\source\repos\Result\Results17-18\F2.txt";
+            //File.Create(p2);
+
+            //string p3 = @"C:\Users\SIVARAGUL\source\repos\Result\Results18-19\F3.txt";
+            //File.Create(p3);
+            //string p4 = @"C:\Users\SIVARAGUL\source\repos\Result\Results18-19\F4.txt";
+            //File.Create(p4);
+
+            //string p5 = @"C:\Users\SIVARAGUL\source\repos\Result\Results20-21\F5.txt";
+            //File.Create(p5);
+            //string p6 = @"C:\Users\SIVARAGUL\source\repos\Result\Results20-21\F6.txt";
+            //File.Create(p6);
+            //Console.WriteLine(" File Created Successfully ");
+
+            //string path1 = @"C:\Users\SIVARAGUL\source\repos\Result\Results17-18\Jan";
+            //Directory.CreateDirectory(path1);
+            //string path2 = @"C:\Users\SIVARAGUL\source\repos\Result\Results17-18\Feb";
+            //Directory.CreateDirectory(path2);
+            //string path3 = @"C:\Users\SIVARAGUL\source\repos\Result\Results17-18\Mar";
+            //Directory.CreateDirectory(path3);
+            //string path4 = @"C:\Users\SIVARAGUL\source\repos\Result\Results17-18\Apr";
+            //Directory.CreateDirectory(path4);
+
+            string path5 = @"C:\Users\SIVARAGUL\source\repos\Result\Results18-19\May";
+            Directory.CreateDirectory(path5);
+            string path6 = @"C:\Users\SIVARAGUL\source\repos\Result\Results18-19\June";
+            Directory.CreateDirectory(path6);
+            string path7 = @"C:\Users\SIVARAGUL\source\repos\Result\Results18-19\July";
+            Directory.CreateDirectory(path7);
+            string path8 = @"C:\Users\SIVARAGUL\source\repos\Result\Results18-19\Aug";
+            Directory.CreateDirectory(path8);
+
+            string path9 = @"C:\Users\SIVARAGUL\source\repos\Result\Results20-21\Sep";
+            Directory.CreateDirectory(path9);
+            string path10 = @"C:\Users\SIVARAGUL\source\repos\Result\Results20-21\Oct";
+            Directory.CreateDirectory(path10);
+            string path11 = @"C:\Users\SIVARAGUL\source\repos\Result\Results20-21\Nov";
+            Directory.CreateDirectory(path11);
+            string path12 = @"C:\Users\SIVARAGUL\source\repos\Result\Results20-21\Dec";
+            Directory.CreateDirectory(path12);
+
+            Console.WriteLine("Folders created");
+
+
+
+
+
+
+
+
+
+        }
+    }
+}
