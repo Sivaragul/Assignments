@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace Filehandling1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string path = @"C:\Users\SIVARAGUL\source\repos\";
+            Console.WriteLine("Enter the file name:");
+            string fn = Console.ReadLine();
+            fn = String.Concat(path, fn);
+            //File.Create(fn);
+            //File.Create(path + fn);
+            //Console.WriteLine("File Created");
+
+            //File.Copy(fn, "CopiedFile.txt");
+
+            //File.Move(fn, "MovedFile.txt");
+            //Console.WriteLine("Successful");
+
+            //File.Delete(fn);
+            //Console.WriteLine("deleted successfully");
+
+            FileInfo fileinfo = new FileInfo(fn);
+            
+            Console.WriteLine(fileinfo.Extension);
+            Console.WriteLine(fileinfo.CreationTime);
+            Console.WriteLine("Directory name"+fileinfo.DirectoryName);
+            
+
+            Console.ReadLine();
+
+        }
+    }
+}
