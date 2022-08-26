@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+
+namespace Filehandling1
+{
+    internal class problem1
+    {
+        static void Main(string[] args)
+        {
+            do
+            {
+                string path= @"C:\Users\SIVARAGUL\source\repos\";
+                Console.WriteLine("Enter the Filename:");
+                string fn = Console.ReadLine();
+                fn = String.Concat(path, fn);
+                Console.WriteLine("Menu \n 1.Create \n 2.Write \n 3.Append \n 4.Truncate");
+                
+                Console.WriteLine("Enter the number:");
+                int n = Convert.ToInt32(Console.ReadLine());
+
+                switch (n)
+                {
+                    case 1:
+
+                        FileStream f1 = new FileStream(fn, FileMode.Create);
+                        f1.Close();
+                        Console.WriteLine("File created");
+                        break;
+                    case 2:
+
+                        FileStream f2 = new FileStream(fn, FileMode.Open, FileAccess.Write);
+                        StreamWriter sw = new StreamWriter(f2);
+                        sw.WriteLine("This is a new file ");
+                        Console.WriteLine("File edited successfully");
+                        f2.Flush();
+                        sw.Flush();
+                        sw.Close();
+                        sw.Dispose();
+                        f2.Close();
+                        f2.Dispose();
+                        break;
+                    case 3:
+
+                        FileStream f3 = new FileStream(fn, FileMode.Append, FileAccess.Write);
+                        StreamWriter sw1 = new StreamWriter(f3);
+                        sw1.WriteLine("hello");
+                        sw1.Close();
+                        sw1.Dispose();
+
+                        f3.Close();
+                        f3.Dispose();
+                        Console.WriteLine("  Appended  successfully");
+                        break;
+                    case 4:
+
+                        FileStream f4 = new FileStream(fn, FileMode.Truncate,FileAccess.Write);
+
+
+
+                        f4.Close();
+                        f4.Dispose();
+                        Console.WriteLine(" Truncated  successfully");
+                        break;
+                    default:
+                        break;
+                }
+            } while (true);
+
+
+
+
+
+                }
+        }
+    }
+
