@@ -1,0 +1,88 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ProductLibrary;
+
+namespace _26._08._2022_problem3
+{
+     public  class ProductLinkedList
+    {
+        static void Main(String[] args)
+        {
+            List<Product> products = new List<Product>();
+            products.Add(new Product { ProId = 1, ProName = "Mobile", ProPrice = 10000 });
+            products.Add(new Product { ProId = 2, ProName = "Laptop", ProPrice = 40000 });
+            products.Add(new Product { ProId = 3, ProName = "Headphone", ProPrice = 1500 });
+
+            Console.WriteLine("Enter the product:");
+            Console.WriteLine("Before remove");
+
+            foreach (var item in products)
+            {
+                Console.WriteLine("ProductId=" + item.ProId);
+                Console.WriteLine("Product Name=" + item.ProName);
+                Console.WriteLine("Product Price=" + item.ProPrice);
+
+            }
+            Console.WriteLine("==========================================");
+            products.RemoveAt(0);
+            Console.WriteLine("After Remove:");
+            foreach (var item in products)
+            {
+                Console.WriteLine("ProductId=" + item.ProId);
+                Console.WriteLine("Product Name=" + item.ProName);
+                Console.WriteLine("Product Price=" + item.ProPrice);
+
+            }
+            Console.WriteLine("============================================");
+
+            Console.ReadLine();
+
+
+
+
+
+        }
+
+    }
+}
+=================================================================================================================================================================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProductLibrary
+{
+    public class Product
+    {
+        private int _proid;
+
+        public int ProId
+        {
+            get { return _proid; }
+            set { _proid = value; }
+        }
+
+        private string _proname;
+
+        public string ProName
+        {
+            get { return _proname; }
+            set { _proname = value; }
+        }
+
+        private int _proprice;
+
+        public int ProPrice
+        {
+            get { return _proprice; }
+            set { _proprice = value; }
+        }
+    }
+}
+
