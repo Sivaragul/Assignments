@@ -1,0 +1,94 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using StudentLibrary;
+
+namespace _26._08._2022
+{
+     class StudentArray
+    {
+        static void Main(string[] args)
+        {
+            Student[] sd = new Student[2];
+
+            for (int i = 0; i < sd.Length; i++)
+            {
+                sd[i] = new Student();
+                Console.WriteLine("Enter Studentid");
+                sd[i].StudId = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter Studentname");
+                sd[i].StudName = Console.ReadLine();
+                Console.WriteLine("Enter Age");
+                sd[i].Age = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter DeptName");
+                sd[i].DeptName = Console.ReadLine();
+                
+            }
+            Console.WriteLine("----------------------");
+
+            foreach (var item in sd)
+            {
+                Console.WriteLine("Following are the details");
+                Console.WriteLine(item.StudId);
+                Console.WriteLine(item.StudName);
+                Console.WriteLine(item.Age);
+                Console.WriteLine(item.DeptName);
+
+            }
+            Console.Read();
+
+        }
+    }
+}
+=================================================================================================================================================================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace StudentLibrary
+{
+    public class Student
+    {
+            
+           private int _sid;
+
+            public int StudId
+            {
+                get { return _sid; }
+                set { _sid = value; }
+            }
+
+            private string _sname;
+
+            public string StudName
+            {
+                get { return _sname; }
+                set { _sname = value; }
+            }
+
+            private int _age;
+
+            public int Age
+            {
+                get { return _age; }
+                set { _age = value; }
+            }
+
+        private string _deptname;
+
+        public string DeptName
+        {
+            get { return _deptname; }
+            set { _deptname = value; }
+        }
+
+
+
+        }
+    }
+
