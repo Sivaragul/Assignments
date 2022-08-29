@@ -1,0 +1,94 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DS_Day2
+{
+    internal class program
+    {
+        static void Main(string[] args)
+        {
+
+            Stack<int> s = new Stack<int>();
+            s.Push(100);
+            s.Push(200);
+            s.Push(300);
+            s.Push(400);
+            Console.WriteLine("Pop Element is:");
+            s.Pop();
+            Console.WriteLine("Elements at present");
+            s.printData();
+            Console.WriteLine("Top element at present:");
+            int t = s.Peek();
+            Console.WriteLine(t);
+
+
+            Console.ReadLine();
+        }
+    }
+}
+
+
+=====================================================================================================================================================================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DS_Day2
+{
+
+    class Stack<T>
+    {
+
+        public static int max = 1000;
+        T[] st = new T[max];
+        int top = -1;
+        public void Push(T str)
+        {
+            if (top >= 1000)
+            {
+                Console.WriteLine("No space on the stack");
+            }
+            else
+            {
+                st[++top] = str;
+            }
+        }
+        public void Pop()
+        {
+            if (top < 0)
+            {
+                Console.WriteLine("No elements on the stack");
+            }
+            else
+            {
+                T val = st[top--];
+                Console.WriteLine(val);
+            }
+        }
+        public T Peek()
+        {
+            if (top < 0)
+            {
+                return default(T);
+            }
+            else
+            {
+                T val = st[top];
+                return val;
+            }
+        }
+        public void printData()
+        {
+            for (int i = top; i >= 0; i--)
+            {
+                Console.WriteLine(st[i]);
+            }
+        }
+ }   }
+
