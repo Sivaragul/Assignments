@@ -1,0 +1,111 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DS_Day2
+{
+    internal class program
+    {
+        static void Main(string[] args)
+        {
+
+            Queueimplementation Q = new Queueimplementation(5);
+
+            Q.Insert(10);
+            Q.Insert(20);
+            Q.Insert(30);
+            Q.Insert(40);
+            Q.Insert(50);
+
+            Console.WriteLine("Items are : ");
+            Q.Printdata();
+            
+            Q.Delete();
+            
+            Console.WriteLine("Items are : ");
+            Q.Printdata();
+
+
+            Console.ReadLine();
+        }
+    }
+}
+
+==============================================================================================================================================================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DS_Day2
+{
+    internal class problem2
+    {
+    }
+    class Queueimplementation
+    {
+        private int[] qe;
+        private int Front;
+        private int Rear;
+        private int Max;
+
+        public Queueimplementation(int size)
+        {
+            qe = new int[size];
+            Front = 0;
+            Rear = -1;
+            Max = size;
+        }
+
+        public void Insert(int item)
+        {
+            if (Rear == Max - 1)
+            {
+                Console.WriteLine("Queue is Overflow");
+                return;
+            }
+            else
+            {
+                qe[++Rear] = item;
+            }
+        }
+
+        public int Delete()
+        {
+            if (Front == Rear + 1)
+            {
+                Console.WriteLine("Queue is Empty");
+                return -1;
+            }
+            else
+            {
+                Console.WriteLine("Deleted element is: " + qe[Front]);
+                return qe[Front++];
+            }
+        }
+
+        public void Printdata()
+        {
+            if (Front == Rear + 1)
+            {
+                Console.WriteLine("Queue is Empty");
+                return;
+            }
+            else
+            {
+                for (int i = Front; i <= Rear; i++)
+                {
+                    Console.WriteLine("Item:{0}" ,qe[i]);
+                }
+            }
+        }
+
+    }
+}
+    
+
+
