@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DS_Day2
+{
+     class SelectionSort
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = new int[] { 2, 33, 67, 8, 45, 73, 22, 59, 17 };
+            Selectionsort(arr);
+            Console.ReadLine();
+
+        }
+        static void Selectionsort(int[] arr)
+        {
+            int Min, i, j;
+            int len = arr.Length - 1;
+            for (i = 0; i < len; i++)
+            {
+                Min = i;
+                for (j = i + 1; j < arr.Length; j++)
+                {
+                    if (arr[j] < arr[Min])
+                    {
+                        Min = j;
+                    }
+                }
+                if (Min != i)
+                {
+                    int temp = arr[Min];
+                    arr[Min] = arr[i];
+                    arr[i] = temp;
+                }
+            }
+
+            Console.WriteLine("Sorted Elements:");
+            for (int c = 0; c < arr.Length; c++)
+            {
+                Console.WriteLine(arr[c]);
+            }
+
+        }
+    }
+}
