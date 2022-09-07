@@ -1,0 +1,50 @@
+program.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DelegatesLib;
+
+namespace DelegatesDemo
+{
+    internal class problem2
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the string");
+            string s=Console.ReadLine();
+
+            Greet g = new Greet();
+
+            gtuserDelegate del=new gtuserDelegate(g.GreetingUser);
+
+            del(s);
+            Console.ReadLine();
+
+        }
+    }
+}
+
+================================================================================================================================================================
+class.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DelegatesLib
+{
+    public delegate void gtuserDelegate(string str);
+    public class Greet
+    {
+        public void GreetingUser(string str)
+        {
+            Console.WriteLine("Hello "+ str);
+        }
+    }
+}
+
