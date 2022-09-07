@@ -1,0 +1,60 @@
+program.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DelegatesLib;
+
+namespace DelegatesDemo
+{
+    internal class problem4
+    {
+        static void Main(string[] args)
+        {
+
+            Product p=new Product();
+
+            Console.WriteLine("Enter the Product Id:");
+            p.ProductId=Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter the Product Name:");
+            p.ProductName=Console.ReadLine();
+
+            PrintProducts del = new PrintProducts(p.DisplayInfo);
+            del();
+
+            Console.ReadLine();
+            
+        }
+    }
+}
+
+================================================================================================================================================================
+
+class.cs
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DelegatesLib
+{
+    public delegate void PrintProducts();
+    public class Product
+    {
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+
+        public void DisplayInfo()
+        {
+            Console.WriteLine("Product Id:"+ProductId);
+            Console.WriteLine("Product Name:"+ProductName);
+        }
+    }
+}
+
