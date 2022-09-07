@@ -1,0 +1,54 @@
+program.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DelegatesLib;
+
+namespace DelegatesDemo
+{
+    internal class problem5
+    {
+        static void Main(string[] args)
+        {
+            Employee e = new Employee();
+            Console.WriteLine("Enter the Date:");
+            e.JoiningYear = Convert.ToDateTime(Console.ReadLine());
+            CalculateYearOfService del = new CalculateYearOfService(e.calculate);
+            del();
+            
+            Console.ReadLine();
+        }
+    }
+}
+
+================================================================================================================================================================
+
+class.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DelegatesLib
+{
+    public delegate void CalculateYearOfService();
+    public class Employee
+    {
+        public DateTime JoiningYear { get; set; }
+
+        public void calculate()
+        {
+            DateTime d = DateTime.Now;
+            int b = d.Year;
+            int b1 = JoiningYear.Year;
+            int c = b - b1;
+            Console.WriteLine("Total Years of Service :" + c);
+        }
+
+    }
+}
