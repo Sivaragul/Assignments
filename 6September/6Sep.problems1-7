@@ -1,0 +1,177 @@
+program.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.ConstrainedExecution;
+using System.Text;
+using System.Threading.Tasks;
+using AccessSpecifierLib;
+
+namespace _06._09._2022
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+
+
+            Person p= new Employee();
+            p.Work();
+            Person p1 = new Manager();
+            p1.Work();
+            Person p2= new Clerk();
+            p2.Work();
+
+            Console.WriteLine("==================");
+            Saving s=new Saving();
+
+            s.CalculateInterest();
+
+            Console.WriteLine("=====================");
+            Current c=new Current();
+
+            c.CalculateInterest();
+
+            Console.ReadLine();
+
+        }
+    }
+}
+
+==================================================================================================================================================================
+
+class library.cs
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AccessSpecifierLib
+{
+    public abstract  class Person
+    {
+
+        public abstract void Work();
+        
+    }
+
+
+    public class Employee:Person
+    {
+
+        public override void Work()
+        {
+            Console.WriteLine("Calling theEmployee");
+        }
+    }
+
+    public class Manager:Person
+    {
+        public override void Work()
+        {
+            Console.WriteLine("Calling the Manager");
+        }
+
+    }
+
+    public class Clerk : Person
+    {
+        public override void Work()
+        {
+            Console.WriteLine("Calling the Clerk");
+        }
+
+    }
+
+
+    interface IBank
+    {
+
+        void PrintBalance();
+        void CalculateInterest();
+    }
+
+
+    public class Saving : IBank
+    {
+        public void CalculateInterest()
+        {
+            double r =4, amt, interest;
+            int y;
+            amt=Convert.ToDouble(Console.ReadLine());
+            y=Convert.ToInt32(Console.ReadLine());
+             interest= amt * y * r/100;
+            
+            Console.WriteLine("Interest:{0}", interest);
+        }
+
+        public void PrintBalance()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        private int _swithdraw;
+
+        public int SWithdraw
+        {
+            get { return _swithdraw; }
+            set { _swithdraw = value; }
+        }
+
+        private int _Staking_amt;
+
+        public int STaking_Amt
+        {
+            get { return _Staking_amt; }
+            set { _Staking_amt = value; }
+        }
+
+    }
+
+    public class Current : IBank
+    {
+        public void CalculateInterest()
+        {
+
+            double r = 2, amt, interest;
+            int y;
+            amt = Convert.ToDouble(Console.ReadLine());
+            y = Convert.ToInt32(Console.ReadLine());
+            interest = amt * y * r / 100;
+
+            Console.WriteLine("Interest:{0}", interest);
+        }
+
+        public void PrintBalance()
+        {
+            throw new NotImplementedException();
+        }
+
+        private int _cwithdraw;
+
+        public int CWithdraw
+        {
+            get { return _cwithdraw; }
+            set { _cwithdraw = value; }
+        }
+
+        private int myVar;
+
+        public int MyProperty
+        {
+            get { return myVar; }
+            set { myVar = value; }
+        }
+
+
+
+    }
+}
+
+
