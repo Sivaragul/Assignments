@@ -1,4 +1,5 @@
 program.cs
+----------
 
 using System;
 using System.Collections.Generic;
@@ -24,26 +25,45 @@ namespace _06._09._2022
             Person p2= new Clerk();
             p2.Work();
 
-            Console.WriteLine("==================");
-            Saving s=new Saving();
+            Console.WriteLine("==============================================================");
 
-            s.CalculateInterest();
+            Saving s = new Saving();
+            s.PrintBalance();
+            int r = s.CalculateInterest();
 
-            Console.WriteLine("=====================");
-            Current c=new Current();
+            Console.WriteLine(r);
+            
+            
+            Console.WriteLine("The Deposited amt is 2000:");
+            s.Deposit(2000);
+            Console.WriteLine("The amt withdrawing 1000:");
+            s.Withdraw(1000);
 
-            c.CalculateInterest();
+            Console.WriteLine("The last updated date: " + s.D);
 
+            Console.WriteLine("===============================================================");
+
+            Current c = new Current();
+            c.PrintBalance();
+            int r1 = c.CalculateInterest();
+            Console.WriteLine(r1);
+
+            Console.WriteLine("The amt  withdrawing 1000:");
+            c.Withdraw(1000);
+            
+            Console.WriteLine("The Deposited amt is 3000:");
+            c.Deposit(3000);
+            Console.WriteLine("The last updated date :" + c.D1);
+            
             Console.ReadLine();
-
         }
     }
 }
 
-==================================================================================================================================================================
+====================================================================================================================================================================
 
-class library.cs
-
+class1.cs
+---------
 
 using System;
 using System.Collections.Generic;
@@ -53,24 +73,24 @@ using System.Threading.Tasks;
 
 namespace AccessSpecifierLib
 {
-    public abstract  class Person
+    public abstract class Person
     {
 
         public abstract void Work();
-        
+
     }
 
 
-    public class Employee:Person
+    public class Employee : Person
     {
 
         public override void Work()
         {
-            Console.WriteLine("Calling theEmployee");
+            Console.WriteLine("Calling the Employee");
         }
     }
 
-    public class Manager:Person
+    public class Manager : Person
     {
         public override void Work()
         {
@@ -88,88 +108,92 @@ namespace AccessSpecifierLib
 
     }
 
-
-    interface IBank
+    public interface IBank
     {
-
         void PrintBalance();
-        void CalculateInterest();
-    }
+        int CalculateInterest();
 
+    }
 
     public class Saving : IBank
     {
-        public void CalculateInterest()
-        {
-            double r =4, amt, interest;
-            int y;
-            amt=Convert.ToDouble(Console.ReadLine());
-            y=Convert.ToInt32(Console.ReadLine());
-             interest= amt * y * r/100;
-            
-            Console.WriteLine("Interest:{0}", interest);
-        }
+        public DateTime D = new DateTime(2012, 08, 07);
 
         public void PrintBalance()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Balance is " + a);
         }
 
-
-        private int _swithdraw;
-
-        public int SWithdraw
-        {
-            get { return _swithdraw; }
-            set { _swithdraw = value; }
+       
+        public int CalculateInterest()
+        { 
+            return a / Interestrate;
         }
 
-        private int _Staking_amt;
-
-        public int STaking_Amt
-        {
-            get { return _Staking_amt; }
-            set { _Staking_amt = value; }
-        }
-
+        public int a = 50000;
+        public int Interestrate = 4;
     }
 
     public class Current : IBank
     {
-        public void CalculateInterest()
-        {
-
-            double r = 2, amt, interest;
-            int y;
-            amt = Convert.ToDouble(Console.ReadLine());
-            y = Convert.ToInt32(Console.ReadLine());
-            interest = amt * y * r / 100;
-
-            Console.WriteLine("Interest:{0}", interest);
-        }
-
+        public DateTime D1 = new DateTime(2012, 08, 07);
         public void PrintBalance()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Balance is " + a1);
         }
 
-        private int _cwithdraw;
+        public int CalculateInterest()
+        { 
+            return a1 / Interestrate; 
+        }
 
-        public int CWithdraw
+        public int a1 = 20000;
+
+        public int Interestrate = 2;
+
+
+    }
+
+
+}
+
+===============================================================================================================================================================
+
+ExtensionMethod.cs
+------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AccessSpecifierLib
+{
+    public static class ExtensionMethod
+    {
+        public static void Withdraw(this Saving s, int amount)
         {
-            get { return _cwithdraw; }
-            set { _cwithdraw = value; }
+            s.a -= amount;
+            s.PrintBalance();
         }
 
-        private int myVar;
-
-        public int MyProperty
+        public static void Withdraw(this Current s, int amount)
         {
-            get { return myVar; }
-            set { myVar = value; }
+            s.a1 -= amount;
+            s.PrintBalance();
         }
 
-
+        public static void Deposit(this Saving s, int amount)
+        {
+            s.a += amount;
+            s.PrintBalance();
+        }
+        public static void Deposit(this Current s, int amount)
+        {
+            s.a1 += amount;
+            s.PrintBalance();
+        }
 
     }
 }
