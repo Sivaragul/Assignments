@@ -1,0 +1,53 @@
+program.cs
+
+using DelegatesLib;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DelegatesDemo
+{
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Console.WriteLine("Enter the string:");
+            string s = Console.ReadLine();
+            FindLength l=new FindLength();
+
+
+            StringLengthDelegate del = new StringLengthDelegate(l.LengthOfString);
+
+            del.Invoke(s);
+            Console.ReadLine();
+        }
+    }
+}
+
+==================================================================================================================================================================
+
+class.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DelegatesLib
+{
+
+    public delegate void StringLengthDelegate(string str);
+    public class FindLength
+    {
+        public void LengthOfString(string str)
+        {
+            int len=str.Length;
+            Console.WriteLine("The length of the string:"+len);
+        }
+
+    }
+}
