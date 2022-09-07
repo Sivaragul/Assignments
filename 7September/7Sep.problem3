@@ -1,0 +1,73 @@
+program.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DelegatesLib;
+
+namespace DelegatesDemo
+{
+    internal class problem3
+    {
+        static void Main(string[] args)
+        {
+            int i, j;
+            Console.WriteLine("Enter the first number:");
+            i=Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter the second number:");
+            j=Convert.ToInt32(Console.ReadLine());
+
+            Operation p=new Operation();
+
+            calcDelegate c = new calcDelegate(p.Addition);
+            c(i, j);
+
+
+            calcDelegate c1=new calcDelegate(p.Subtraction);
+            c1(i, j);
+
+
+            calcDelegate c2=new calcDelegate(p.Multiply);
+            c2(i, j);
+        }
+    }
+}
+
+================================================================================================================================================================
+
+class.cs
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DelegatesLib
+{
+    public delegate void calcDelegate(int a, int b);
+    public class Operation
+    {
+        public void Addition(int a,int b)
+        {
+            int c = a + b;
+            Console.WriteLine("Addition of {0} & {1} is :{2}\n", a, b, c);
+        }
+
+        public void Subtraction(int a,int b)
+        {
+            int c=a- b;
+            Console.WriteLine("Subtraction of {0} & {1} is :{2}\n",a,b,c);
+        }
+
+        public void Multiply(int a,int b)
+        {
+            int c = a * b;
+            Console.WriteLine("Multiply of {0} & {1} is :{2}", a, b, c);
+        }
+    }
+}
+
