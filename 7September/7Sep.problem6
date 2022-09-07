@@ -1,0 +1,55 @@
+program.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DelegatesLib;
+
+namespace DelegatesDemo
+{
+    internal class problem6
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the first string:");
+            string s1=Console.ReadLine();
+            Console.WriteLine("Enter the second string:");
+            string s2=Console.ReadLine();
+
+            Concatenate c=new Concatenate();
+
+            Concatstring del = new Concatstring(c.Concat);
+            del(s1, s2);
+            Console.ReadLine();
+
+            
+        }
+    }
+}
+
+================================================================================================================================================================
+
+class.cs
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DelegatesLib
+{
+
+    public delegate void Concatstring(string str1, string str2);
+    public class Concatenate
+    {
+        public void Concat(string str1,string str2)
+        {
+            string s=string.Concat(str1,str2);
+            Console.WriteLine("Concatenate string: "+s);
+        }
+    }
+}
