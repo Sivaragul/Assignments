@@ -1,0 +1,54 @@
+program.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DelegatesLib;
+
+namespace DelegatesDemo
+{
+    internal class problem7
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the string:");
+            string s=Console.ReadLine();
+
+            Uppercase c=new Uppercase();
+
+            Upper del = new Upper(c.FirstlettertoUpper);
+            del(s);
+
+            Console.ReadLine();
+
+
+        }
+    }
+}
+
+=========================================================================================================================================================
+
+class.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DelegatesLib
+{
+    public delegate void Upper(string str);
+    public class Uppercase
+    {
+        public void FirstlettertoUpper(string str)
+        {
+            string s = char.ToUpper(str[0])+str.Substring(1);
+            Console.WriteLine("First letter to Uppercase:" + s);
+        }
+
+    }
+}
+
