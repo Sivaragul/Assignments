@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace ThreadingDemo
+{
+    public class class1
+    {
+        public static void M2()
+        {
+            for (int i = 0; i <4; i++)
+            {
+                Console.WriteLine("Print  i= " + i);
+                Console.WriteLine("Thread Name =" + Thread.CurrentThread.Name);
+                
+                Thread.Sleep(300);
+            }
+
+        }
+        static void Main(string[] args)
+        {
+            Thread t1 = new Thread(M2);
+            t1.Name = "Thread first";
+            Thread t2 = new Thread(M2);
+            t2.Name = "Thread second";
+            Thread t3 = new Thread(M2);
+            t3.Name = "Thread third";
+
+            t2.Priority = ThreadPriority.Highest;
+            t1.Priority = ThreadPriority.Normal;
+            t3.Priority = ThreadPriority.Lowest;
+
+            t1.Start();
+            t2.Start();
+            t3.Start();
+
+            Console.ReadLine();
+        }
+    }
+}
