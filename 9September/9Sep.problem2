@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+
+namespace ThreadingDemo
+{
+    public class ThreadstateDemo
+    {
+        public static void M1()
+        {
+            Thread.Sleep(1000);
+         Console.WriteLine("Sleep state="+Thread.CurrentThread.ThreadState);
+        }
+
+
+        static void Main(string[] args)
+        {
+            Thread t1 = new Thread(M1);
+            t1.Name = "My Thread";
+            Console.WriteLine(t1.Name);
+            
+            Console.WriteLine("-----Before start-----");
+            Console.WriteLine("Is T1 alive=" + t1.IsAlive);
+            Console.WriteLine("Thread state=" + t1.ThreadState);
+
+            t1.Start();
+            
+            Console.WriteLine("----After start-----");
+            Console.WriteLine("Is T1 alive=" + t1.IsAlive);
+           
+            Console.WriteLine("Thread state=" + t1.ThreadState);
+            
+            
+
+            Console.ReadLine();
+        }
+
+    }
+}
