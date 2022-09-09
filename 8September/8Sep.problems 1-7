@@ -1,0 +1,220 @@
+program.cs
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ClassLibrary1;
+
+
+namespace LambdaExpression
+{
+    internal class Program
+    {
+
+        public delegate void Emplo(Employee e);
+        public delegate void Printing();
+        public class EmployeeOperations : EventArgs
+        {
+            public static event Emplo Addevent;
+            public static event Emplo Updateevent;
+            public static event Emplo Deleteevent;
+
+            static void Main(string[] args)
+            {
+                Addevent += Empop_Addevent;
+                Updateevent += Empop_Updateevent;
+                Deleteevent += Empop_Deleteevent;
+
+                do
+                {
+                    Console.WriteLine("Menu \n 1 Add Employee \n 2 Update Employee \n 3 Delete Employee");
+                    int choice = Convert.ToInt32(Console.ReadLine());
+                    Employee e = new Employee();
+                    switch (choice)
+                    {
+                        case 1:
+
+                            Console.WriteLine("Enter Employee ID");
+                            e.EmpId = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Enter Employee Name");
+                            e.EmpName = Console.ReadLine();
+                            Console.WriteLine("Enter phone no");
+                            e.DeptNo = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Enter the location");
+                            e.Location = Console.ReadLine();
+                            Console.WriteLine("Enter Department Name");
+                            e.DeptName = Console.ReadLine();
+                            Console.WriteLine("Enter Salary");
+                            e.Sal = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Enter the Manager Name");
+                            e.Mgr = Console.ReadLine();
+                            Addevent(e);
+                            break;
+                        case 2:
+
+                            Console.WriteLine("Enter Employee ID");
+                            e.EmpId = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Enter Employee Name");
+                            e.EmpName = Console.ReadLine();
+                            Console.WriteLine("Enter phone no");
+                            e.DeptNo = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Enter the location");
+                            e.Location = Console.ReadLine();
+                            Console.WriteLine("Enter Department Name");
+                            e.DeptName = Console.ReadLine();
+                            Console.WriteLine("Enter Salary");
+                            e.Sal = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Enter the Manager Name");
+                            e.Mgr = Console.ReadLine();
+                            Updateevent(e);
+                            break;
+                        case 3:
+                            Console.WriteLine("Enter Employee Id");
+                            e.EmpId = Convert.ToInt32(Console.ReadLine());
+                            Deleteevent(e);
+                            break;
+                        default:
+                            Environment.Exit(1);
+                            break;
+                    }
+
+                } while (true);
+
+
+            }
+            private static void Empop_Deleteevent(Employee e)
+            {
+                EmployeeOperations operations = new EmployeeOperations();
+                Emplo emp = new Emplo(operations.DeleteEmployee);
+                emp(e);
+            }
+
+            private static void Empop_Updateevent(Employee e)
+            {
+                EmployeeOperations operations = new EmployeeOperations();
+                Emplo emp = new Emplo(operations.UpdateEmployee);
+                emp(e);
+            }
+
+            private static void Empop_Addevent(Employee e)
+            {
+
+                EmployeeOperations operations = new EmployeeOperations();
+                Emplo emp = new Emplo(operations.AddEmployee);
+                emp(e);
+            }
+
+            public static int num = 0;
+
+            public void Addcount()
+            {
+                num += 1;
+                Console.WriteLine("===========================");
+                Console.WriteLine("Added Employee {0}", num);
+                Console.WriteLine("==========================");
+            }
+            public static List<Employee> emplist = new List<Employee>();
+            public void AddEmployee(Employee e)
+            {
+                if (num <= 10)
+                {
+                    emplist.Add(e);
+                    Console.WriteLine("Employee Added Successfully");
+                }
+                else
+                {
+                    Console.WriteLine("Can't Add more than 10 Employees");
+                }
+                Addcount();
+                PrintEmployee();
+
+
+            }
+
+            public void UpdateEmployee(Employee e)
+            {
+                Employee found = emplist.Find(x => x.EmpId == e.EmpId);
+                found.EmpName = e.EmpName;
+                found.Sal = e.Sal;
+                found.Location = e.Location;
+                found.Mgr = e.Mgr;
+                found.DeptNo = e.DeptNo;
+                Console.WriteLine("Updated Successfully");
+                Console.WriteLine("=========================");
+                PrintEmployee();
+            }
+
+            public void DeleteEmployee(Employee e)
+            {
+                emplist.RemoveAll(x => x.EmpId == e.EmpId);
+                Console.WriteLine("Deleted Successfully");
+                Console.WriteLine("==============================");
+                PrintEmployee();
+
+            }
+
+
+            public void PrintEmployee()
+            {
+                foreach (Employee e in emplist)
+                {
+                    Console.WriteLine("Employee Id :" + e.EmpId);
+                    Console.WriteLine("Employee Name :" + e.EmpName);
+                    Console.WriteLine("Salary :" + e.Sal);
+                    Console.WriteLine("Location :" + e.Location);
+                    Console.WriteLine("Manager :" + e.Mgr);
+                    Console.WriteLine("Deparment Number" + e.DeptNo);
+                    Console.WriteLine("=========================================");
+
+                }
+            }
+
+        }
+    }
+}
+
+        
+           
+================================================================================================================================================================
+
+class.cs
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ClassLibrary1
+{
+    public class Department
+    {
+        public int DeptNo { get; set; }
+
+        public string DeptName { get; set; }
+
+        public string Location { get; set; }
+    }
+
+
+    public class Employee : Department
+    {
+
+        public int EmpId { get; set; }
+
+        public string EmpName { get; set; }
+
+        public int Sal { get; set; }
+
+        public string Mgr { get; set; }
+    }
+    }
+
+
+
