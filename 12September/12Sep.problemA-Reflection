@@ -1,0 +1,90 @@
+program.cs
+
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Reflection;
+
+namespace _12._09._2022_Reflection
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string path = @"C:\Users\SIVARAGUL\source\repos\12.09.2022_Reflection\CalculatorLibrary\bin\Debug\CalculatorLibrary.dll";
+
+           Assembly asm=Assembly.LoadFrom(path);
+
+            Type[] types= asm.GetTypes();
+            Type t = null;
+
+            foreach(var item in types)
+            {
+                t = asm.GetType(item.FullName);
+                object obj = Activator.CreateInstance(t);
+                Console.Write("Enter the Number  :");
+                double n = Convert.ToInt32(Console.ReadLine());
+
+                item.InvokeMember("Acceptnumber", BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod, null, obj,
+               new object[1] { n });
+
+                item.InvokeMember("Cube", BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod, null, obj, null);
+
+                item.InvokeMember("SQRT", BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod, null, obj, null);
+
+
+
+            }
+
+            Console.ReadLine();
+        }
+    }
+}
+
+==================================================================================================================================================================
+
+calculator.cs
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CalculatorLibrary
+{
+    public class Calculator
+    { 
+
+        public double n { get; set; }
+
+        public void Acceptnumber(double num)
+        {
+            n = num;
+        }
+       
+       
+
+
+       public void Cube()
+        {
+
+            double a = n * n * n;
+            Console.WriteLine("Cube:"+a);
+        }
+
+        public void SQRT()
+        {
+          
+            double r=Math.Sqrt(n);
+            Console.WriteLine("sqrt:"+r);
+        }
+    }
+}
+
