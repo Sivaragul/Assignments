@@ -1,0 +1,533 @@
+class.cs
+--------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HrLibrary
+{
+
+        [Serializable()]
+        public class Movie
+        {
+            public string MName { get; set; }
+            public string Language { get; set; }
+            public string Genre { get; set; }
+            public int Stock { get; set; }
+            public Movie(string _name, string _language, string _genre, int _stock)
+            {
+                MName = _name;
+                Language = _language;
+                Genre = _genre;
+                Stock = _stock;
+
+            }
+            public Movie()
+            {
+
+            }
+        }
+
+        [Serializable()]
+        public class Searching
+        {
+            public List<Movie> Search
+            {
+                get;
+                set;
+            }
+            public static List<Movie> movies = new List<Movie>();
+            public void initiate()
+            {
+                movies.Add(new Movie("Master", "Tamil", "Action", 25));
+                movies.Add(new Movie("The Conjuring", "English", "Horror", 30));
+                movies.Add(new Movie("Bahubali", "Telugu", "Historical", 50));
+                movies.Add(new Movie("Ratchasan", "Tamil", "Thriller", 35));
+                movies.Add(new Movie("777 Charlie", "Kannada", "Drama", 40));
+            }
+            public void search()
+            {
+                Console.WriteLine("Search by\n 1.Name\n 2.Language\n 3.Genre");
+                int p = Convert.ToInt32(Console.ReadLine());
+                switch (p)
+                {
+                    case 1:
+                        Console.WriteLine("Enter the movie name to search");
+                        string q = Console.ReadLine();
+                        var pt = movies.Where(pi => pi.MName == q).ToList();
+                        if (pt != null)
+                        {
+                            Search = pt;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Movie unavailable");
+                        }
+                        break;
+                    case 2:
+                        Console.WriteLine("Enter the movie language to search");
+                        string qq = Console.ReadLine();
+                        var tp = movies.Where(pi => pi.Language == qq).ToList();
+                        if (tp != null)
+                        {
+                            Search = tp;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Language unavailable");
+                        }
+                        break;
+                    case 3:
+                        Console.WriteLine("Enter the movie genre to search");
+                        string qqq = Console.ReadLine();
+                        var tpp = movies.Where(pi => pi.Genre == qqq).ToList();
+                        if (tpp != null)
+                        {
+                            Search = tpp;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Language unavailable");
+                        }
+                        break;
+
+                }
+            }
+            public void AddMovies()
+            {
+                Movie m = new Movie();
+                Console.WriteLine("Enter movie name");
+                m.MName = Console.ReadLine();
+                Console.WriteLine("Enter movie language");
+                m.Language = Console.ReadLine();
+                Console.WriteLine("Enter movie genre");
+                m.Genre = Console.ReadLine();
+                Tuple<string, string, string> mi = Tuple.Create<string, string, string>(m.MName, m.Language, m.Genre);
+                Predicate<Tuple<string, string, string>> k = (i) =>
+                {
+                    int flag = 0;
+                    foreach (var item in movies)
+                    {
+                        if (item.MName == i.Item1 && item.Language == i.Item2 && item.Genre == i.Item3)
+                        {
+                            flag = 1;
+                            break;
+                        }
+
+                    }
+                    if (flag == 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                };
+                if (k(mi))
+                {
+                    Console.WriteLine("Already Exists");
+                }
+                else
+                {
+                    movies.Add(m);
+
+                }
+            }
+            public void DeleteMovies()
+            {
+
+                Movie md = new Movie();
+                Console.WriteLine("Enter movie name");
+                md.MName = Console.ReadLine();
+                Console.WriteLine("Enter movie language");
+                md.Language = Console.ReadLine();
+                Console.WriteLine("Enter movie genre");
+                md.Genre = Console.ReadLine();
+                foreach (var item in movies)
+                {
+                    if (item.MName == md.MName && item.Language == md.Language && item.Genre == md.Genre)
+                    {
+
+                        movies.Remove(item);
+                    }
+
+                }
+
+            }
+
+            public void DisplayMovies()
+            {
+                foreach (var item in movies)
+                {
+                Console.WriteLine(item.MName);
+                Console.WriteLine(item.Language);
+                Console.WriteLine(item.Genre);
+                }
+            }
+        }
+        [Serializable()]
+        public class CustomerUser : Searching
+        {
+
+            public long Id { get; set; }
+
+            public string password;
+            public string Password
+            {
+                get { return password; }
+                set { password = value; }
+            }
+            public string login
+            {
+                get;
+                set;
+            }
+            public DateTime date
+            {
+                get { return DateTime.Now; }
+            }
+            public bool validate()
+            {
+                if (Id == 8734566784 && Password == "9876543201")
+                {
+                    login = "true";
+                    return true;
+                }
+                else
+                {
+                    login = "false";
+                    return false;
+                }
+            }
+
+
+            public List<Movie> alreadyseen
+            {
+                get;
+                set;
+            }
+
+
+
+
+
+        }
+        [Serializable()]
+        public class Watch : Searching
+        {
+            public List<Tuple<Movie, DateTime>> watchlist = new List<Tuple<Movie, DateTime>>();
+            public List<Tuple<Movie, int>> release = new List<Tuple<Movie, int>>();
+            public List<Tuple<string, int, double>> total = new List<Tuple<string, int, double>>();
+            public void Addtowatchlist()
+            {
+                string s = Console.ReadLine();
+                var pi = movies.Where(p => p.MName == s).ToList();
+                if (pi != null)
+                {
+                    foreach (Movie item in pi)
+                    {
+
+                        Console.WriteLine(item.MName);
+
+                        movies.Remove(item);
+                        item.Stock = item.Stock - 1;
+                        Console.WriteLine("Enter year");
+                        int yr1 = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Enter month");
+                        int mon1 = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Enter date");
+                        int dt1 = Convert.ToInt32(Console.ReadLine());
+                        DateTime t1 = new DateTime(yr1, mon1, dt1);
+
+                        Tuple<Movie, DateTime> ji = Tuple.Create<Movie, DateTime>(item, t1);
+                        movies.Add(item);
+                        watchlist.Add(ji);
+
+
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("Cannot be added");
+                }
+
+            }
+            public void releaselist()
+            {
+
+                string cp = Console.ReadLine();
+                Tuple<Movie, DateTime> k = null;
+                foreach (var item in watchlist)
+                {
+                    if (cp == item.Item1.MName)
+                    {
+                        k = item;
+
+                        movies.Remove(item.Item1);
+                        item.Item1.Stock = item.Item1.Stock + 1;
+
+                        Console.WriteLine("Enter year");
+                        int yr = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Enter month");
+                        int mon = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Enter date");
+                        int dt = Convert.ToInt32(Console.ReadLine());
+                        DateTime t = new DateTime(yr, mon, dt);
+                        TimeSpan ts = t - item.Item2;
+                        Tuple<Movie, int> poi = Tuple.Create<Movie, int>(item.Item1, ts.Days);
+                        release.Add(poi);
+                        movies.Add(item.Item1);
+
+
+                    }
+
+
+                }
+                watchlist.Remove(k);
+            }
+            public void totalcostassociated(string p)
+            {
+                int flag = 0;
+                foreach (var item in release)
+                {
+                    if (p == item.Item1.MName)
+                    {
+                        flag = 1;
+                        Console.WriteLine(item.Item1.MName);
+                        Console.WriteLine("Enter the cost for one day");
+                        double Cost = Convert.ToDouble(Console.ReadLine());
+                        double k = 0.18 * Cost;
+                        double ty = item.Item2 * 0.01 * Cost;
+                        double yt = k + ty + Cost;
+                        Console.WriteLine($"GST is {k}");
+                        Console.WriteLine($"Bluray cost is {ty}");
+                        Console.WriteLine("Total cost is" + " " + yt);
+                        Tuple<string, int, double> k2 = Tuple.Create(item.Item1.MName, item.Item2, yt);
+
+                        total.Add(k2);
+                    }
+                }
+                foreach (var item in watchlist)
+                {
+                    if (p == item.Item1.MName)
+                    {
+                        Console.WriteLine(item.Item1.MName);
+                        Console.WriteLine("Enter the cost for one day");
+                        double Cost = Convert.ToDouble(Console.ReadLine());
+                        TimeSpan tu = DateTime.Now - item.Item2;
+                        double k = 0.18 * Cost;
+                        double ty = (tu.Days) * 0.01 * Cost;
+                        double yt = k + ty + Cost;
+                        Console.WriteLine($"GST is {k}");
+                        Console.WriteLine($"Bluray cost is {ty}");
+                        Console.WriteLine("Total cost is" + " " + yt);
+                        Tuple<string, int, double> k2 = Tuple.Create(item.Item1.MName, tu.Days, yt);
+
+                        total.Add(k2);
+                    }
+                    else if (flag != 1)
+                    {
+                        foreach (var item1 in movies)
+                        {
+                            if (p == item1.MName)
+                            {
+
+                                Console.WriteLine(item1.MName);
+                                Console.WriteLine("Enter the cost for one day");
+                                double Cost = Convert.ToDouble(Console.ReadLine());
+
+                                double k = 0.18 * Cost;
+                                double ty = 0 * 0.01 * Cost;
+                                double yt = k + ty + Cost;
+                                Console.WriteLine($"GST is {k}");
+                                Console.WriteLine($"Bluray cost is {ty}");
+                                Console.WriteLine("Total cost is" + " " + yt);
+                                Tuple<string, int, double> k2 = Tuple.Create(item.Item1.MName, 0, yt);
+
+                                total.Add(k2);
+                            }
+                        }
+
+                    }
+                }
+            }
+
+
+        }
+    }
+
+
+
+
+
+====================================================================================================================================================================
+
+program.cs
+----------
+
+using HrLibrary;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _14._09._2022
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+            CustomerUser s1 = new CustomerUser();
+            s1.Id = 8734566784;
+            s1.Password = "9876543201";
+            s1.validate();
+            CustomerUser s2 = new CustomerUser();
+            s2.Id = 9688675450;
+            s2.Password = "9876543201";
+            s2.validate();
+            FileStream fs = new FileStream(@"file.bin", FileMode.Create, FileAccess.Write);
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(fs, s1);
+            bf.Serialize(fs, s2);
+            fs.Flush();
+            fs.Close();
+            fs.Dispose();
+            FileStream fs1 = new FileStream(@"file.bin", FileMode.Open, FileAccess.Read);
+            BinaryFormatter bf1 = new BinaryFormatter();
+            CustomerUser[] s = new CustomerUser[2];
+            for (int i = 0; i < 2; i++)
+            {
+
+                s[i] = (CustomerUser)bf1.Deserialize(fs1);
+            }
+            foreach (var item in s)
+            {
+                Console.WriteLine(item.Id);
+                Console.WriteLine(item.Password);
+                Console.WriteLine(item.login);
+                Console.WriteLine(item.date);
+            }
+
+            fs1.Flush();
+            fs1.Close();
+            fs1.Dispose();
+            Searching si1 = new Searching();
+            si1.initiate();
+            si1.DisplayMovies();
+            si1.search();
+            FileStream fs2 = new FileStream(@"file1.bin", FileMode.Create, FileAccess.Write);
+            BinaryFormatter write = new BinaryFormatter();
+            write.Serialize(fs2, si1);
+            fs2.Flush();
+            fs2.Close();
+            fs2.Dispose();
+            FileStream fs3 = new FileStream(@"file1.bin", FileMode.Open, FileAccess.Read);
+            BinaryFormatter read = new BinaryFormatter();
+            Searching si2 = new Searching();
+            si2 = (Searching)read.Deserialize(fs3);
+            foreach (var item in si2.Search)
+            {
+                Console.WriteLine($"{item.MName} {item.Language} {item.Genre} {item.Stock}");
+            }
+            fs3.Flush();
+            fs3.Close();
+            fs3.Dispose();
+
+
+            Console.WriteLine("Add watchlist");
+            Watch e1 = new Watch();
+        mer:
+
+            Console.WriteLine("enter name of movie");
+            e1.Addtowatchlist();
+            Console.WriteLine("Enter yes to continue");
+            string d = Console.ReadLine();
+            if (d == "yes")
+            {
+                goto mer;
+            }
+            foreach (var item in e1.watchlist)
+            {
+
+                Console.WriteLine($"{item.Item1.MName} {item.Item1.Language} {item.Item1.Genre} {item.Item1.Stock} {item.Item2}");
+            }
+            string s11 = JsonConvert.SerializeObject(e1);
+            FileStream fs7 = new FileStream(@"file3.json", FileMode.Create, FileAccess.Write);
+            StreamWriter w1 = new StreamWriter(fs7);
+            w1.Write(s11);
+            w1.Close();
+            w1.Dispose();
+            fs7.Close();
+            fs7.Dispose();
+            FileStream fs8 = new FileStream(@"file3.json", FileMode.Open, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs8);
+            string s12 = sr.ReadToEnd();
+
+            Watch s22 = JsonConvert.DeserializeObject<Watch>(s12);
+            foreach (var item in s22.watchlist)
+            {
+
+                Console.WriteLine($"{item.Item1.MName} {item.Item1.Language} {item.Item1.Genre} {item.Item1.Stock} {item.Item2}");
+            }
+            Console.WriteLine("Already seen movie");
+            e1.releaselist();
+            List<Movie> dgg = new List<Movie>();
+            foreach (var item in e1.release)
+            {
+                dgg.Add(item.Item1);
+            }
+            s1.alreadyseen = dgg;
+            FileStream fs4 = new FileStream(@"file2.Xml", FileMode.Create, FileAccess.Write);
+            System.Xml.Serialization.XmlSerializer xm = new System.Xml.Serialization.XmlSerializer(typeof(CustomerUser));
+            xm.Serialize(fs4, s1);
+            fs4.Flush();
+            fs4.Close();
+            fs4.Dispose();
+            FileStream fs5 = new FileStream(@"file2.Xml", FileMode.Open, FileAccess.Read);
+            System.Xml.Serialization.XmlSerializer ms = new System.Xml.Serialization.XmlSerializer(typeof(CustomerUser));
+            var t = (CustomerUser)ms.Deserialize(fs5);
+            Console.WriteLine("Already seen movies");
+            foreach (var item in t.alreadyseen)
+            {
+                Console.WriteLine($"{item.MName} {item.Language} {item.Genre} {item.Stock}");
+            }
+            fs5.Flush();
+            fs5.Close();
+            fs5.Dispose();
+            Console.WriteLine("Cost of which movie you want to know");
+            string id = Console.ReadLine();
+            e1.totalcostassociated(id);
+            FileStream fs9 = new FileStream(@"file4.bin", FileMode.Create, FileAccess.Write);
+            BinaryFormatter write1 = new BinaryFormatter();
+            write1.Serialize(fs9, e1);
+            fs9.Flush();
+            fs9.Close();
+            fs9.Dispose();
+            FileStream fs81 = new FileStream(@"file4.bin", FileMode.Open, FileAccess.Read);
+            BinaryFormatter read1 = new BinaryFormatter();
+
+            var sii2 = (Watch)read.Deserialize(fs81);
+            foreach (var item in sii2.total)
+            {
+                Console.WriteLine($"{item.Item1} {item.Item2} {item.Item3}");
+            }
+            fs81.Flush();
+            fs81.Close();
+            fs81.Dispose();
+
+
+            Console.ReadLine();
+
+        }
+    }
+}
