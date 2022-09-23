@@ -1,0 +1,206 @@
+create database LibrarySystem 
+
+use LibrarySystem
+
+create table Member
+(
+Member_Id numeric(5),
+Member_Name char(25),
+Acc_Open_Date date,
+Max_Books_Allowed numeric(2),
+Penalty_Amount numeric(7,2)
+)
+
+create table Book
+(
+Book_No numeric(6),
+Book_Name varchar(30),
+Author char(30),
+Cost numeric(7,2),
+Category char(10)
+)
+
+create table Issue
+(
+Lib_Issue_Id numeric(10),
+Issue_Date date,
+Return_Date date
+)
+
+alter table Issue
+add Book_No numeric(6) foreign key references Book(Book_No)
+
+alter table Issue
+add Member_Id numeric(5) foreign key references Member(Member_Id)
+
+sp_help Book
+
+
+select*from Book
+select*from Member
+select*from Issue
+
+alter table Issue
+add Comments varchar(100)
+
+alter table Member
+alter column Member_Name char(30)
+
+
+alter table Issue
+add Reference char(30)
+
+alter table Issue
+drop column Reference
+
+
+insert into Member values(1,'Richa Sharma','10-Dec-05',5,50)
+insert into Member values(2,'Garima Sen',getdate(),3,Null)
+insert into Member values(3,'Virat Kohli','20-Nov-10',Null,60)
+insert into Member values(4,'Arjun Das',Null,4,40)
+insert into Member values(5,'Samcurran',getdate(),2,20)
+
+
+alter table Member
+alter column Member_Name char(20)
+
+insert into Member values(6,'kumar',getdate(),110,80)
+
+select*into Member101 from Member
+
+select*from Member101
+
+select*from Book
+
+insert into Book values(101,'Let us C','Denis Ritchie',450,'System')
+insert into Book values(102,'Oracle – Complete Ref','Loni',550,'Database')
+insert into Book values(103,'Mastering SQL','Loni',250,'Database')
+insert into Book values(104,'PL SQL-Ref','Scott Urman',750,'Database')
+
+select*into Book101 from Book
+select*from Book101
+
+insert into Book values(105,'National Geographic','Adis Scott', 1000,'Science')
+
+Delete from Book 
+where Book_No =105
+
+update Book set Cost = 300,Category = 'RDBMS' where book_no = 103 
+
+select*from Member
+select*from Issue
+
+insert into Issue(Lib_Issue_Id,Book_No,Member_Id,Issue_Date)values(7001,101,1,'10-Dec-06')
+
+insert into Issue(Lib_Issue_Id,Book_No,Member_Id,Issue_Date)values(7002,102,2,'25-Dec-06')
+
+insert into Issue(Lib_Issue_Id,Book_No,Member_Id,Issue_Date) values(7003,104,1,'15-Jan-06')
+
+insert into Issue(Lib_Issue_Id,Book_No,Member_Id,Issue_Date) values(7004,101,1,'04-Jul-06')
+
+insert into Issue(Lib_Issue_Id,Book_No,Member_Id,Issue_Date) values(7005,104,2,'15-Nov-06')
+
+insert into Issue(Lib_Issue_Id,Book_No,Member_Id,Issue_Date) values(7006,101,3,'18-Feb-06')
+
+update Issue set Return_Date ='19-Jul-06'where Lib_Issue_Id = 7004 
+
+update Issue set Return_Date ='30-Nov-06'where Lib_Issue_Id = 7005
+
+select*from Member
+
+update Member set Penalty_Amount = 100 where Member_Id = 2
+
+Delete from Issue
+where Member_Id = 1 and Issue_Date < '10-Dec-06'
+
+select*from Issue
+
+select*from Book
+
+delete from Book where Category !='RDBMS' and Category !='Database'
+
+alter table Issue
+drop constraint FK__Issue__Book_No__15502E78
+--Delete from Book where category not in ('RDBMS','Database')
+
+
+drop table Member101
+drop table Book101
+
+select*from Member
+select*from Book
+select*from Issue
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+select*from Member
+where year(Acc_Open_Date)=2006
+
+
+select*from Book
+where Author='Loni' and Cost<600
+
+
+select*from Issue
+where Return_Date > getdate()
+
+
+update Issue set Return_Date='31-Dec-06'
+where Lib_Issue_Id !=7005 and Lib_Issue_Id !=7006
+
+
+select*from Issue
+Where (Day(Return_Date) - Day(Issue_Date)) >30
+
+
+select*from Book
+where (Cost>=500 and Cost<=750) and Category='Database' 
+
+
+select*from Book
+where Category='Science' or Category='Database' or Category='Fiction' or Category='Management'
+
+
+select*from Member
+order by Penalty_Amount desc
+
+
+select*from Book
+order by Category,Cost desc
+
+
+Select*from Book
+where Book_Name like '%SQL%'
+
+
+select*from Member
+where Member_Name like 'R%' or Member_Name like 'G%' and Member_Name like '%I%'
+
+
+select upper(Author) as Author_in_upper,Book_Name from Book
+order by Book_Name desc
+
+
+select Book_No,('is Written by')as '---------------',Author from Book
+
+
+select Lib_Issue_Id,(Return_Date - Issue_Date) as Book_issued from Issue
+
+
+select count(Book_No) from Issue
+where Member_Id=101
+
+
+select sum(Penalty_Amount) as Total_Penalty from Member
+
+--22)
+select sum(Cost) as Total_books_price from Book
+where Category='Database'
+
+
+select min(Cost) as Cheapest_Book from Book
+
+
+select avg(Cost) as average_price from Book
+where Category='Database'
