@@ -1,0 +1,153 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BAL_Library;
+
+namespace _28._09._2022_Entity
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            BookOperations bo = new BAL_Library.BookOperations();
+            List<BookBLL> books=bo.GetBooks();
+
+            foreach(var item in books)
+            {
+                Console.WriteLine(item.Book_No+ " " +item.Book_Name+" "+item.Author+" "+item.Cost+" " +item.Category);
+            }
+
+            Console.WriteLine("----------------------------------------------------------------------------------------");
+
+            MemberOperations ma=new BAL_Library.MemberOperations();
+            List<MemberBal> members=ma.GetMembers();
+
+            foreach(var item in members)
+            {
+                Console.WriteLine(item.Member_Id + " " + item.Member_Name + " " + item.Acc_Open_Date + " " + item.Max_Books_Allowed + " " + item.Penalty_Amount);
+            }
+
+            Console.WriteLine("==============================================================================================================================================");
+
+
+
+            Console.ReadLine();
+        }
+    }
+}
+======================================================================================================================================================================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BAL_Library
+{
+    public class BookBLL
+    {
+        public decimal Book_No { get; set; }
+        public string Book_Name { get; set; }
+
+        public string Author { get; set; }
+        public Nullable<decimal> Cost { get; set; }    
+        public string Category { get; set; }
+
+
+	}
+}
+============================================================================================================================================================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BAL_Library
+{
+    public class MemberBal
+    {
+        public decimal Member_Id { get; set; }
+        public string Member_Name { get; set; } 
+        public Nullable<System.DateTime> Acc_Open_Date { get; set; }
+        public Nullable<decimal> Max_Books_Allowed { get; set; }
+        public Nullable<decimal> Penalty_Amount { get; set; }
+    }
+}
+==============================================================================================================================================================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DAL_Library;
+
+namespace BAL_Library
+{
+    public class BookOperations
+    {
+        public void InsertBook(BookBLL b)
+        {
+            LibrarySystemEntities context=new LibrarySystemEntities();
+            Book b1=new Book();
+            b1.Book_No = b.Book_No;
+            b1.Book_Name = b.Book_Name;
+            b1.Author = b.Author;
+            b1.Cost=b.Cost;
+            b1.Category = b.Category;
+            context.Books.Add(b1);
+            context.SaveChanges();
+
+
+        }
+
+        public List<BookBLL> GetBooks()
+        {
+            LibrarySystemEntities context=new LibrarySystemEntities();
+
+            List<Book> blist=context.Books.ToList();
+            List<BookBLL> bclist=new List<BookBLL>();
+            foreach(var item in blist)
+            {
+                bclist.Add(new BookBLL { Book_No = item.Book_No, Book_Name = item.Book_Name, Author = item.Author, Cost = item.Cost, Category = item.Category });
+            }
+
+            return bclist;
+        }
+    }
+}
+=================================================================================================================================================================
+
+using DAL_Library;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BAL_Library
+{
+    public  class MemberOperations
+    {
+        public List<MemberBal> GetMembers()
+        {
+            LibrarySystemEntities context=new LibrarySystemEntities();
+
+            List<Member> mlist=context.Members.ToList();
+            List<MemberBal> mclist=new List<MemberBal>();
+            foreach(var item in mlist)
+            {
+                mclist.Add(new MemberBal { Member_Id=item.Member_Id,Member_Name=item.Member_Name,Acc_Open_Date=item.Acc_Open_Date,Max_Books_Allowed=item.Max_Books_Allowed,Penalty_Amount=item.Penalty_Amount });
+            }
+            return mclist;
+
+        }
+    }
+}
+
+
