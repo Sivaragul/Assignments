@@ -1,0 +1,103 @@
+
+
+namespace ModelDAlDemo
+{
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    
+    public partial class BankDContainer : DbContext
+    {
+        public BankDContainer()
+            : base("name=BankDContainer")
+        {
+        }
+    
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
+    
+        public virtual DbSet<Borrower> Borrowers { get; set; }
+        public virtual DbSet<Loan> Loans { get; set; }
+    }
+}
+
+=========================================================================================================================================================
+
+SQL
+-----
+-- --------------------------------------------------
+-- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
+-- --------------------------------------------------
+-- Date Created: 09/29/2022 19:14:40
+-- Generated from EDMX file: C:\Users\SIVARAGUL\source\repos\29.09.2022_ModelFirst\ModelDAlDemo\BankD.edmx
+-- --------------------------------------------------
+
+SET QUOTED_IDENTIFIER OFF;
+GO
+USE [BankDA];
+GO
+IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
+GO
+
+-- --------------------------------------------------
+-- Dropping existing FOREIGN KEY constraints
+-- --------------------------------------------------
+
+
+-- --------------------------------------------------
+-- Dropping existing tables
+-- --------------------------------------------------
+
+
+-- --------------------------------------------------
+-- Creating all tables
+-- --------------------------------------------------
+
+-- Creating table 'Borrowers'
+CREATE TABLE [dbo].[Borrowers] (
+    [BorrowerId] int IDENTITY(1,1) NOT NULL,
+    [BorrowerName] nvarchar(max)  NOT NULL,
+    [City] nvarchar(max)  NOT NULL,
+    [State] nvarchar(max)  NOT NULL,
+    [Country] nvarchar(max)  NOT NULL,
+    [Street] nvarchar(max)  NOT NULL,
+    [CompanyName] nvarchar(max)  NOT NULL,
+    [JobName] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Loans'
+CREATE TABLE [dbo].[Loans] (
+    [LoanId] int IDENTITY(1,1) NOT NULL,
+    [LoanType] nvarchar(max)  NOT NULL,
+    [Amount] int  NOT NULL,
+    [Duration] time  NOT NULL,
+    [RateofInterest] int  NOT NULL
+);
+GO
+
+-- --------------------------------------------------
+-- Creating all PRIMARY KEY constraints
+-- --------------------------------------------------
+
+-- Creating primary key on [BorrowerId] in table 'Borrowers'
+ALTER TABLE [dbo].[Borrowers]
+ADD CONSTRAINT [PK_Borrowers]
+    PRIMARY KEY CLUSTERED ([BorrowerId] ASC);
+GO
+
+-- Creating primary key on [LoanId] in table 'Loans'
+ALTER TABLE [dbo].[Loans]
+ADD CONSTRAINT [PK_Loans]
+    PRIMARY KEY CLUSTERED ([LoanId] ASC);
+GO
+
+-- --------------------------------------------------
+-- Creating all FOREIGN KEY constraints
+-- --------------------------------------------------
+
+-- --------------------------------------------------
+-- Script has ended
+-- --------------------------------------------------
