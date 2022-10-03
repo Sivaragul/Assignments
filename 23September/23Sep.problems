@@ -1,0 +1,205 @@
+program.cs
+----------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BLL.Lib;
+using Helper_Lib;
+
+namespace _23._09._2022
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+
+
+
+                help_Product titles = new help_Product();
+
+                List<BL_Product> books = new List<BL_Product>();
+
+                books = titles.get_products();
+
+                foreach (var item in books)
+                {
+                    Console.WriteLine(item.ProductID);
+                    Console.WriteLine(item.ProductName);
+                    Console.WriteLine(item.UnitPrice);
+                    Console.WriteLine("***");
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+            Console.Read();
+
+        }
+    }
+}
+================================================================================================================================================================
+
+using System;
+using System.Collections.Generic;
+using System.Data.SqlTypes;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BLL.Lib
+{
+    public class BL_Product
+    {
+		private int _productid;
+
+		public int ProductID
+		{
+			get { return _productid; }
+
+			set {
+
+				if (value == 0)
+				{
+					throw new Exception("product id is not valid");
+				}
+				else
+				{
+					_productid = value;
+				}
+				
+				}
+		}
+
+		private string  _productname;
+
+		public string  ProductName
+		{
+			get { return _productname; }
+
+			set {
+
+				if (string.IsNullOrEmpty(value) || (value.Length > 78))
+				{
+					throw new Exception("prdouct name is not valid");
+				}
+				else
+				{
+					_productname = value;
+				}
+
+				}
+		}
+
+		private float _unitprice;
+
+		public float UnitPrice
+		{
+			get { return _unitprice; }
+
+			set {
+				if (value == 0)
+				{
+					throw new Exception("unit price not valid");
+				}
+
+				else
+				{
+
+					_unitprice = value;
+				}
+				
+				}
+		}
+
+
+
+
+
+	}
+}
+===================================================================================================================================================================
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BLL.Lib;
+
+
+namespace DLL_Lib
+{
+    public class DAC_Products
+    {
+        public List<BL_Product> Showproducts()
+        {
+            string connectionString = "Data Source=LAPTOP-2I11P2BT\\SQLEXPRESS;Initial Catalog=Northwind;Integrated Security=True;";
+            SqlConnection cn = new SqlConnection(connectionString);
+            
+
+            SqlCommand cmd = new SqlCommand("select * from products", cn);
+            cn.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            List<BL_Product> books = new List<BL_Product>();
+            if (dr.HasRows)
+            {
+
+                while (dr.Read())
+                {
+                    BL_Product pro = new BL_Product();
+                    pro.ProductID = dr[0].GetHashCode();
+                    pro.ProductName = dr[1].ToString();
+                    pro.UnitPrice = dr[5].GetHashCode();
+
+                    books.Add(pro);
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("No records found");
+            }
+            cn.Close();
+            return books;
+
+        }
+    }
+}
+
+========================================================================================================================================================================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
+using System.Text;
+using System.Threading.Tasks;
+using BLL.Lib;
+using DLL_Lib;
+
+
+namespace Helper_Lib
+{
+    public class help_Product
+    {
+        public List<BL_Product> get_products()
+        {
+            DAC_Products titles = new DAC_Products();
+            List<BL_Product> booksList = new List<BL_Product>();
+            booksList = titles.Showproducts();
+            return booksList;
+
+        }
+    }
+}
