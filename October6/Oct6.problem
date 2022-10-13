@@ -1,0 +1,251 @@
+Book.cs
+--------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace _06._10._2022.Models
+{
+    public class Book
+    {
+      
+            public int BookId { get; set; }
+            public string BookName { get; set; }
+
+            public string Author { get; set; }
+        
+    }
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BookController.cs
+-----------------
+
+using _06._10._2022.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace _06._10._2022.Controllers
+{
+    public class BookController : Controller
+    {
+        // GET: Book
+
+        static List<Book> BList = new List<Book>();
+        static BookController()
+        {
+            BList.Add(new Book { BookId = 1, BookName = "Oracle", Author = "John" });
+
+            BList.Add(new Book { BookId = 2, BookName = "Object_Oriented", Author = "James" });
+            BList.Add(new Book { BookId = 3, BookName = "Mastering-SQL", Author = "Loni" });
+        }
+        public ActionResult Index()
+        {
+            ViewData["Mybooklist"] = BList;
+            return View(BList);
+        }
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Member.cs
+---------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace _06._10._2022.Models
+{
+    public class Member
+    {
+        public int MemberId { get; set; }
+        public string MemberName { get; set; }  
+        public int Books_Allowed { get; set; }
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MemberController.cs
+----------------------
+using _06._10._2022.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace _06._10._2022.Controllers
+{
+    public class MemberController : Controller
+    {
+        // GET: Member
+
+        static List<Member> mList = new List<Member>();
+         static MemberController()
+        {
+            mList.Add(new Member { MemberId = 1, MemberName = "Rohit", Books_Allowed = 2 });
+            mList.Add(new Member { MemberId = 2, MemberName = "John", Books_Allowed = 4 });
+            mList.Add(new Member { MemberId = 3, MemberName = "Ravi", Books_Allowed = 5 });
+            mList.Add(new Member { MemberId = 4, MemberName = "kumar", Books_Allowed = 8 });
+
+        }
+        public ActionResult Index()
+        {
+            ViewBag.msg = "The List of Members";
+            return View(mList);
+        }
+        
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MemberCrudController.cs
+----------------------
+
+using _06._10._2022.Models;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace _06._10._2022.Controllers
+{
+    public class MemberCrudController : Controller
+    {
+        // GET: MemberCrud
+        static List<Member> MemList = new List<Member>();
+        static MemberCrudController()
+        {
+
+            MemList.Add(new Member { MemberId = 1, MemberName = "Rohit", Books_Allowed = 2 });
+            MemList.Add(new Member { MemberId = 2, MemberName = "John", Books_Allowed = 4 });
+            MemList.Add(new Member { MemberId = 3, MemberName = "Ravi", Books_Allowed = 5 });
+            MemList.Add(new Member { MemberId = 4, MemberName = "kumar", Books_Allowed = 8});
+
+        }
+        public ActionResult Index()
+        {
+            return View(MemList);
+        }
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Member model)
+        {
+            MemList.Add(model);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            Member foundData = MemList.Find(Member => Member.MemberId == id);
+
+
+            return View(foundData);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, Member m)
+        {
+            Member foundData = MemList.Find(Member => Member.MemberId == id);
+            MemList.Remove(foundData);
+            MemList.Add(m);
+            return RedirectToAction("Index");
+
+        }
+
+        public ActionResult Delete(int id)
+        {
+            Member foundData = MemList.Find(Member => Member.MemberId == id);
+            return View(foundData);
+        }
+
+
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            Member foundData = MemList.Find(Member => Member.MemberId == id);
+            MemList.Remove(foundData);
+            return View(foundData);
+        }
+    }
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ProductModel.cs
+-----------------
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace _06._10._2022.Models
+{
+    public class ProductModel
+    {
+        [Required()]
+        public int ProductId { get; set; }
+
+        [MaxLength(10, ErrorMessage = "Name cannot be greater than 10 characters")]
+        public string ProductName { get; set; }
+        public int ProductPrice { get; set; }
+
+
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        public DateTime Mfgdate
+        {
+            get;
+            set;
+        }
+    }
+
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ProductController.cs
+-------------------
+using _06._10._2022.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace _06._10._2022.Controllers
+{
+    public class ProductController : Controller
+    {
+        // GET: Product
+
+
+        static List<ProductModel> proList = new List<ProductModel>();
+        static ProductController()
+        {
+            proList.Add(new ProductModel { ProductId = 1, ProductName = "Key Board", ProductPrice = 300, Mfgdate = new DateTime(2018, 4, 10) });
+            proList.Add(new ProductModel { ProductId = 2, ProductName = "Speaker", ProductPrice = 500, Mfgdate = new DateTime(2017, 8, 7) }); 
+            proList.Add(new ProductModel { ProductId = 3, ProductName = "Monitor", ProductPrice = 4000 , Mfgdate = new DateTime(2015, 11, 13) });
+
+        }
+        public ActionResult Index()
+        {
+            return View(proList);
+        }
+
+        public ActionResult SearchProduct(int id)
+        {
+            ProductModel foundpro = proList.Find(ProductModel => ProductModel.ProductId == id);
+            return View(foundpro);
+        }
+    }
+}
+
+
+
+
